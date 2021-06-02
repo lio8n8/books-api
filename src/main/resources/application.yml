@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/booksdb
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  liquibase:
+    user: postgres
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/booksdb
+    change-log: classpath:db/changelog/db.changelog-master.xml
+  application:
+    name: books
+server:
+  port: 8080
