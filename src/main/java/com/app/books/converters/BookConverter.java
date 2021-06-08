@@ -35,6 +35,7 @@ public class BookConverter implements Converter<Book, BookDTO> {
                 .bookName(source.getBookName())
                 .soldAmount(source.getSoldAmount())
                 .publishedAmount(source.getPublishedAmount())
+                .successRate(source.getSuccessRate())
                 .build();
 
         if (null != source.getAuthors() && !source.getAuthors().isEmpty()) {

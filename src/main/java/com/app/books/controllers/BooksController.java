@@ -30,6 +30,7 @@ import static com.app.books.Urls.MOST_PUBLISHED;
 import static com.app.books.Urls.MOST_PUBLISHED_BOOKS_LIST;
 import static com.app.books.Urls.MOST_SELLING_BOOK;
 import static com.app.books.Urls.MOST_SELLING_BOOKS_LIST;
+import static com.app.books.Urls.MOST_SUCCESSFUL_BOOKS_LIST;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -91,7 +92,11 @@ public class BooksController implements IBooksController {
      * {@inheritDoc}
      */
     @Override
-    @PostMapping(value = MOST_SELLING_BOOKS_LIST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(
+            value = MOST_SELLING_BOOKS_LIST,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
     @ApiOperation("Find most selling book list by author name")
     public ResponseEntity<Collection<BookDTO>> findMostSelling(@Valid @RequestBody final SearchRequestDTO request) {
         return new ResponseEntity<>(
@@ -104,11 +109,32 @@ public class BooksController implements IBooksController {
      * {@inheritDoc}
      */
     @Override
-    @PostMapping(value = MOST_PUBLISHED_BOOKS_LIST, consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(
+            value = MOST_PUBLISHED_BOOKS_LIST,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
     @ApiOperation("Find most published book list by author name.")
     public ResponseEntity<Collection<BookDTO>> findMostPublished(@Valid @RequestBody final SearchRequestDTO request) {
         return new ResponseEntity<>(
                 booksService.findByAuthorAndSortByPublishedAmount(request)
+                        .stream()
+                        .map(b -> conversionService.convert(b, BookDTO.class)).collect(Collectors.toList()), OK);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @PostMapping(
+            value = MOST_SUCCESSFUL_BOOKS_LIST,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    @ApiOperation("Find most successful book list by author name.")
+    public ResponseEntity<Collection<BookDTO>> findMostSuccessful(@Valid @RequestBody final SearchRequestDTO request) {
+        return new ResponseEntity<>(
+                booksService.findByAuthorAndSortBySuccessRate(request)
                         .stream()
                         .map(b -> conversionService.convert(b, BookDTO.class)).collect(Collectors.toList()), OK);
     }
@@ -127,8 +153,11 @@ public class BooksController implements IBooksController {
      * {@inheritDoc}
      */
     @Override
-    @PutMapping(BOOK)
-    @ApiOperation(value = "Update book.", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PutMapping(value = BOOK,
+            consumes = APPLICATION_JSON_VALUE,
+            produces = APPLICATION_JSON_VALUE
+    )
+    @ApiOperation("Update book.")
     public ResponseEntity<BookDTO> update(@PathVariable("id") final UUID id,
         @Valid @RequestBody final BookRequestDTO request) {
         return new ResponseEntity<>(conversionService.convert(booksService.update(id, request), BookDTO.class), OK);

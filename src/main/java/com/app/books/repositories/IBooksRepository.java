@@ -47,4 +47,11 @@ public interface IBooksRepository extends JpaRepository<Book, UUID> {
      * @return {@link List} of {@link Book}
      */
     List<Book> findByAuthorsAuthorNameContainingIgnoreCaseOrderByPublishedAmountDesc(String query);
+
+    /**
+     * Find all books by author's name and sort by success rate.
+     * @param query author name query
+     * @return {@link List} of {@link Book}
+     */
+    List<Book> findByAuthorsAuthorNameContainingIgnoreCaseOrderBySuccessRateDesc(String query);
 }

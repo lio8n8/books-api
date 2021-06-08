@@ -58,6 +58,13 @@ public interface IBooksService {
     List<Book> findByAuthorAndSortByPublishedAmount(SearchRequestDTO request);
 
     /**
+     * Find all books by author's name and sort by success rate.
+     * @param request to search
+     * @return {@link List} of {@link Book}
+     */
+    List<Book> findByAuthorAndSortBySuccessRate(SearchRequestDTO request);
+
+    /**
      * Create book
      *
      * @param request {@link BookRequestDTO}

@@ -83,6 +83,14 @@ public class BooksService implements IBooksService {
      * {@inheritDoc}.
      */
     @Override
+    public List<Book> findByAuthorAndSortBySuccessRate(final SearchRequestDTO request) {
+        return booksRepository.findByAuthorsAuthorNameContainingIgnoreCaseOrderBySuccessRateDesc(request.getSearchQuery());
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
     public Book create(final BookRequestDTO request) {
         return booksRepository.save(Book.builder()
                 .bookName(request.getBookName())

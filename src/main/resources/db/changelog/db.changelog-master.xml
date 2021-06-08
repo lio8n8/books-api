@@ -3,4 +3,5 @@
     <include file="02-06-2021-uuid-generator.xml" relativeToChangelogFile="true"/>
     <include file="02-06-2021-author-table.xml" relativeToChangelogFile="true"/>
     <include file="02-06-2021-book-table.xml" relativeToChangelogFile="true"/>
+    <include file="08-06-2021-add-success-book-rate-column.xml" relativeToChangelogFile="true"/>
 </databaseChangeLog>

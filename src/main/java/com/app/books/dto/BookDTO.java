@@ -40,6 +40,11 @@ public class BookDTO {
     private Integer soldAmount;
 
     /**
+     * Success rate (soldAmount/publishedAmount).
+     */
+    private Float successRate;
+
+    /**
      * List of book authors.
      */
     private List<AuthorDTO> authors;

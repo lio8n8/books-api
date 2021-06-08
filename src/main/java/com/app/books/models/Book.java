@@ -61,6 +61,12 @@ public class Book {
     @Column(name = "published_amount")
     private Integer publishedAmount;
 
+    /**
+     * Success rate (soldAmount/publishedAmount).
+     */
+    @Column(name = "success_rate", insertable = false, updatable = false)
+    private Float successRate;
+
     // TODO: Replace List to Set.
     /**
      * List of authors.

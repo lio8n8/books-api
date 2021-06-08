@@ -49,6 +49,13 @@ public interface IBooksController {
     ResponseEntity<Collection<BookDTO>> findMostPublished(SearchRequestDTO request);
 
     /**
+     * Find most successful books.
+     * @param request {@link SearchRequestDTO}
+     * @return {@link Collection} of {@link BookDTO}
+     */
+    ResponseEntity<Collection<BookDTO>> findMostSuccessful(SearchRequestDTO request);
+
+    /**
      * Create a new book
      * @param request {@link BookRequestDTO}
      * @return {@link BookDTO}

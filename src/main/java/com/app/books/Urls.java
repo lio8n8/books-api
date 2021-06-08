@@ -43,7 +43,12 @@ public interface Urls {
     /**
      * Endpoint url to get most published books list.
      */
-    String MOST_PUBLISHED_BOOKS_LIST = BOOKS + "most-published-list";
+    String MOST_PUBLISHED_BOOKS_LIST = BOOKS + "/most-published-list";
+
+    /**
+     * Endpoint to find the list of most successful books.
+     */
+    String MOST_SUCCESSFUL_BOOKS_LIST = BOOKS + "/most-successful-list";
 
     /**
      * Book url.
@@ -59,4 +64,9 @@ public interface Urls {
      * Author url.
      */
     String AUTHOR = AUTHORS + "/{id}";
+
+    /**
+     * Url to get the most successful author.
+     */
+    String MOST_SUCCESSFUL_AUTHOR = AUTHORS + "/most-successful";
 }
