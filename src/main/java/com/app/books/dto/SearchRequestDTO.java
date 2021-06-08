@@ -7,7 +7,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 /**
@@ -18,25 +17,12 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthorRequestDTO {
+public class SearchRequestDTO {
 
     /**
-     * Author name.
+     * Search query.
      */
-    @NotEmpty(message = "Author name required.")
+    @NotEmpty(message = "Search query required.")
     @ApiModelProperty(required = true)
-    private String authorName;
-
-    /**
-     * Author email.
-     */
-    @NotEmpty(message = "Author email required.")
-    @Email
-    @ApiModelProperty(required = true)
-    private String email;
-
-    /**
-     * Author phone.
-     */
-    private String phone;
+    private String searchQuery;
 }

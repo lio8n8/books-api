@@ -16,5 +16,8 @@
             <column name="phone" type="VARCHAR"/>
             <column name="birth_date" type="TIMESTAMP WITH TIME ZONE"/>
         </createTable>
+
+        <addUniqueConstraint tableName="author" columnNames="author_name"/>
+        <addUniqueConstraint tableName="author" columnNames="email"/>
     </changeSet>
 </databaseChangeLog>

@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+import java.util.UUID;
+
 /**
  * Contains book data.
  */
@@ -15,6 +18,11 @@ import lombok.Setter;
 @NoArgsConstructor
 @Builder
 public class BookDTO {
+
+    /**
+     * Book id.
+     */
+    private UUID id;
 
     /**
      * Book name.
@@ -30,4 +38,9 @@ public class BookDTO {
      * Amount of selled books.
      */
     private Integer soldAmount;
+
+    /**
+     * List of book authors.
+     */
+    private List<AuthorDTO> authors;
 }

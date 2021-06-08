@@ -16,6 +16,7 @@ public interface IAuthorsService {
      * @param id author id
      *
      * @return {@link Author}
+     * @throws RuntimeException throws if author does not exist
      */
     public Author findById(UUID id);
 

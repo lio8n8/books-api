@@ -34,7 +34,9 @@ public class AuthorsService implements IAuthorsService {
     @Override
     public Author create(final AuthorRequestDTO request) {
         return authorsRepository.save(Author.builder()
-
+                .authorName(request.getAuthorName())
+                .email(request.getEmail())
+                .phone(request.getPhone())
                 .build());
     }
 
@@ -44,6 +46,10 @@ public class AuthorsService implements IAuthorsService {
     @Override
     public Author update(final UUID id, final AuthorRequestDTO request) {
         Author author = findById(id);
+
+        author.setAuthorName(request.getAuthorName());
+        author.setEmail(request.getEmail());
+        author.setPhone(request.getPhone());
 
         return authorsRepository.save(author);
     }
