@@ -1,0 +1,27 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+
+    <changeSet author="nataliiaboichuk" id="08-06-2021-22-38">
+        <createProcedure>
+            <![CDATA[
+            CREATE OR REPLACE FUNCTION calculateSuccessAuthorRates()
+            RETURNS TABLE (authorName VARCHAR, successAuthorRate REAL)
+            language plpgsql AS
+            $$
+            BEGIN
+                RETURN QUERY
+                SELECT res.author_name as authorName, (success_rate / book_count)::REAL AS successAuthorRate
+                FROM (SELECT author_name, SUM(success_rate) as success_rate, COUNT(book.id) AS book_count
+                FROM book
+                INNER JOIN book_author ON book.id = book_author.book_id
+                INNER JOIN author ON author.id = book_author.author_id
+                GROUP BY author_name) AS res
+                ORDER BY successAuthorRate;
+            END;
+            $$
+            ]]>
+        </createProcedure>
+    </changeSet>
+</databaseChangeLog>
