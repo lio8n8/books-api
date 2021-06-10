@@ -56,7 +56,7 @@ public class Author {
     /**
      * Author birth date.
      */
-    @Column(name = "birth_date")
+    @Column(name = "birth_date", columnDefinition = "TIMESTAMP WITH TIME ZONE")
     private Instant birthDate;
 }
 

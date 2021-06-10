@@ -2,6 +2,7 @@ package com.app.books.controllers;
 
 import com.app.books.dto.AuthorDTO;
 import com.app.books.dto.AuthorRequestDTO;
+import com.app.books.dto.SuccessAuthorRateDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.UUID;
@@ -10,6 +11,12 @@ import java.util.UUID;
  * Authors controller interface.
  */
 public interface IAuthorsController {
+
+    /**
+     * Find author with the highest success rate.
+     * @return {@link SuccessAuthorRateDTO}
+     */
+    ResponseEntity<SuccessAuthorRateDTO> findSuccessAuthorRate();
 
     /**
      * Create author

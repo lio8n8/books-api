@@ -2,6 +2,7 @@ package com.app.books.controllers;
 
 import com.app.books.dto.AuthorDTO;
 import com.app.books.dto.AuthorRequestDTO;
+import com.app.books.dto.SuccessAuthorRateDTO;
 import com.app.books.services.IAuthorsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,6 +22,7 @@ import java.util.UUID;
 
 import static com.app.books.Urls.AUTHOR;
 import static com.app.books.Urls.AUTHORS;
+import static com.app.books.Urls.MOST_SUCCESSFUL_AUTHOR;
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -30,6 +32,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
  */
 @RestController
 @AllArgsConstructor
+@Api("Authors controller.")
 public class AuthorsController implements IAuthorsController {
 
     /**
@@ -41,6 +44,15 @@ public class AuthorsController implements IAuthorsController {
      * Authors service.
      */
     private final IAuthorsService authorsService;
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @GetMapping(value = MOST_SUCCESSFUL_AUTHOR, produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<SuccessAuthorRateDTO> findSuccessAuthorRate() {
+        return new ResponseEntity<>(conversionService.convert(authorsService.findSuccessAuthorRate(), SuccessAuthorRateDTO.class), OK);
+    }
 
     /**
      * {@inheritDoc}

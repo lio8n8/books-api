@@ -3,22 +3,22 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
 
-    <changeSet author="nataliiaboichuk" id="08-06-2021-22-38">
+    <changeSet author="nataliiaboichuk" id="08-06-2021-22-37">
         <createProcedure>
             <![CDATA[
             CREATE OR REPLACE FUNCTION calculateSuccessAuthorRates()
-            RETURNS TABLE (authorName VARCHAR, successAuthorRate REAL)
+            RETURNS TABLE (authorName VARCHAR, id UUID, successAuthorRate REAL)
             language plpgsql AS
             $$
             BEGIN
                 RETURN QUERY
-                SELECT res.author_name as authorName, (success_rate / book_count)::REAL AS successAuthorRate
-                FROM (SELECT author_name, SUM(success_rate) as success_rate, COUNT(book.id) AS book_count
+                SELECT res.author_name, res.author_id AS id, (success_rate / book_count)::REAL AS success_author_rate
+                FROM (SELECT author_name, author_id, SUM(success_rate) as success_rate, COUNT(book.id) AS book_count
                 FROM book
                 INNER JOIN book_author ON book.id = book_author.book_id
                 INNER JOIN author ON author.id = book_author.author_id
-                GROUP BY author_name) AS res
-                ORDER BY successAuthorRate;
+                GROUP BY author_name, author_id) AS res
+                ORDER BY success_author_rate DESC;
             END;
             $$
             ]]>

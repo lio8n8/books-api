@@ -21,6 +21,7 @@ public class AuthorConverter implements Converter<Author, AuthorDTO> {
                 .authorName(source.getAuthorName())
                 .email(source.getEmail())
                 .phone(source.getPhone())
+                .birthDate(source.getBirthDate())
                 .build();
     }
 }

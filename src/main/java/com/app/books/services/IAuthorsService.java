@@ -2,6 +2,7 @@ package com.app.books.services;
 
 import com.app.books.dto.AuthorRequestDTO;
 import com.app.books.models.Author;
+import com.app.books.models.SuccessAuthorRate;
 
 import java.util.UUID;
 
@@ -19,6 +20,12 @@ public interface IAuthorsService {
      * @throws RuntimeException throws if author does not exist
      */
     public Author findById(UUID id);
+
+    /**
+     * Find author with the highest success rate.
+     * @return {@link SuccessAuthorRate}
+     */
+    SuccessAuthorRate findSuccessAuthorRate();
 
     /**
      * Create author
